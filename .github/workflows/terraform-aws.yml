@@ -22,6 +22,11 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.5.0
+      - name: Prepare Lambda deployment package
+        run: |
+          if [ -f lambda_placeholder.js ]; then
+            zip -q lambda_placeholder.zip lambda_placeholder.js
+          fi
       - name: Terraform init validate plan
         run: |
           terraform init -backend=false -input=false
@@ -42,6 +47,11 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.5.0
+      - name: Prepare Lambda deployment package
+        run: |
+          if [ -f lambda_placeholder.js ]; then
+            zip -q lambda_placeholder.zip lambda_placeholder.js
+          fi
       - name: Terraform apply
         run: |
           terraform init -input=false

@@ -1,6 +1,7 @@
 
-resource "aws_sqs_queue" "sqs-queue" {
-  name                       = "${var.project_name}-sqs-queue"
+resource "aws_sqs_queue" "test-sqs" {
+  name                       = "${var.project_name}-test-sqs"
   visibility_timeout_seconds = 60
+  message_retention_seconds  = 345600
   tags                       = local.tags
 }

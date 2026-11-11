@@ -1,11 +1,11 @@
-resource "aws_sns_topic_subscription" "sns-test-topic_to_test-sqs" {
-  topic_arn = aws_sns_topic.sns-test-topic.arn
+resource "aws_sns_topic_subscription" "event-topic_to_test-queue" {
+  topic_arn = aws_sns_topic.event-topic.arn
   protocol  = "sqs"
-  endpoint  = aws_sqs_queue.test-sqs.arn
+  endpoint  = aws_sqs_queue.test-queue.arn
 }
 
-resource "aws_sqs_queue_policy" "sns-test-topic_to_test-sqs_queue_policy" {
-  queue_url = aws_sqs_queue.test-sqs.id
+resource "aws_sqs_queue_policy" "event-topic_to_test-queue_queue_policy" {
+  queue_url = aws_sqs_queue.test-queue.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -13,17 +13,17 @@ resource "aws_sqs_queue_policy" "sns-test-topic_to_test-sqs_queue_policy" {
       Effect    = "Allow"
       Principal = { Service = "sns.amazonaws.com" }
       Action    = "sqs:SendMessage"
-      Resource  = aws_sqs_queue.test-sqs.arn
+      Resource  = aws_sqs_queue.test-queue.arn
       Condition = {
         ArnEquals = {
-          "aws:SourceArn" = aws_sns_topic.sns-test-topic.arn
+          "aws:SourceArn" = aws_sns_topic.event-topic.arn
         }
       }
     }]
   })
 }
-resource "aws_lambda_event_source_mapping" "test-sqs_image-lambda" {
-  event_source_arn = aws_sqs_queue.test-sqs.arn
+resource "aws_lambda_event_source_mapping" "test-queue_image-lambda" {
+  event_source_arn = aws_sqs_queue.test-queue.arn
   function_name    = aws_lambda_function.image-lambda.arn
   batch_size       = 10
 }

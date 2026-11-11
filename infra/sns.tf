@@ -1,5 +1,5 @@
 
-resource "aws_sns_topic" "sns-test-topic" {
-  name = "${var.project_name}-sns-test-topic"
+resource "aws_sns_topic" "event-topic" {
+  name = "${var.project_name}-event-topic"
   tags = local.tags
 }

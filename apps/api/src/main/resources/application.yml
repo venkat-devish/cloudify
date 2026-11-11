@@ -1,0 +1,26 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: cloudify-api
+  servlet:
+    multipart:
+      max-file-size: 12MB
+      max-request-size: 12MB
+cloudify:
+  cors-origins: http://localhost:3000
+  vision:
+    provider: ${VISION_PROVIDER:auto}
+    gemini-api-key: ${GEMINI_API_KEY:}
+    gemini-model: ${GEMINI_MODEL:gemini-2.0-flash}
+    ollama-base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+    ollama-vision-model: ${OLLAMA_VISION_MODEL:llava}
+  terraform:
+    binary: terraform
+    allow-apply: false
+  github:
+    enabled: ${GITHUB_ENABLED:false}
+    owner: ${GITHUB_OWNER:}
+    repository: ${GITHUB_REPOSITORY:cloudify-infra}
+    default-branch: ${GITHUB_DEFAULT_BRANCH:main}
+    personal-access-token: ${GITHUB_TOKEN:}

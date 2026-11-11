@@ -1,0 +1,9 @@
+
+    private void appendGeneric(Map<String, String> files, TopologyNode n, String file) {
+        String key = "infra/" + file;
+        String id = sanitize(n.getName());
+        String block = files.getOrDefault(key, "");
+        block += "\n# Cloudify stub for " + n.getType() + "\n";
+        block += "resource \"" + n.getType() + "\" \"" + id + "\" {\n  tags = local.tags\n}\n";
+        files.put(key, block);
+    }

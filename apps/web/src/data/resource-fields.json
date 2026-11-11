@@ -1,0 +1,34 @@
+{
+  "aws_sns_topic": [
+    { "key": "name", "label": "Topic name", "required": true, "type": "string", "placeholder": "events" },
+    {
+      "key": "displayName",
+      "label": "Display name",
+      "suggested": true,
+      "type": "string",
+      "placeholder": "Order events (console label)"
+    }
+  ],
+  "aws_sqs_queue": [
+    { "key": "name", "label": "Queue name", "required": true, "type": "string" },
+    { "key": "visibilityTimeoutSeconds", "label": "Visibility timeout (sec)", "suggested": true, "type": "number", "default": 60 },
+    { "key": "messageRetentionSeconds", "label": "Retention (sec)", "suggested": true, "type": "number", "default": 345600 }
+  ],
+  "aws_lambda_function": [
+    { "key": "name", "label": "Function name", "required": true, "type": "string" },
+    { "key": "runtime", "label": "Runtime", "required": true, "type": "select", "options": ["nodejs20.x", "nodejs18.x", "python3.12"] },
+    { "key": "logRetentionDays", "label": "Log retention (days)", "suggested": true, "type": "number", "default": 90 }
+  ],
+  "aws_s3_bucket": [
+    { "key": "name", "label": "Bucket name", "required": true, "type": "string" },
+    { "key": "retentionDays", "label": "Lifecycle retention (days)", "suggested": true, "type": "number", "default": 90 },
+    { "key": "versioning", "label": "Versioning enabled", "suggested": true, "type": "boolean", "default": true }
+  ],
+  "external_client": [
+    { "key": "name", "label": "Client label", "required": true, "type": "string", "default": "client" }
+  ],
+  "aws_dynamodb_table": [
+    { "key": "name", "label": "Table name", "required": true, "type": "string" },
+    { "key": "billingMode", "label": "Billing mode", "suggested": true, "type": "select", "options": ["PAY_PER_REQUEST", "PROVISIONED"], "default": "PAY_PER_REQUEST" }
+  ]
+}

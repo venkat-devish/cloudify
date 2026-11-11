@@ -1,0 +1,28 @@
+{
+  "edgeKinds": {
+    "sns_to_sqs": {
+      "sourceTypes": [
+        "aws_sns_topic"
+      ],
+      "targetTypes": [
+        "aws_sqs_queue"
+      ]
+    },
+    "sqs_to_lambda": {
+      "sourceTypes": [
+        "aws_sqs_queue"
+      ],
+      "targetTypes": [
+        "aws_lambda_function"
+      ]
+    },
+    "lambda_to_s3": {
+      "sourceTypes": [
+        "aws_lambda_function"
+      ],
+      "targetTypes": [
+        "aws_s3_bucket"
+      ]
+    }
+  }
+}

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 560" role="img" aria-label="Cloudify workflow from diagram to Terraform pull request">
+  <defs>
+    <filter id="cardShadow" x="-4%" y="-8%" width="108%" height="120%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.18"/>
+    </filter>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fff1f2"/>
+    </linearGradient>
+    <marker id="flowArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,5 L0,10 Z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="560" fill="url(#pageBg)"/>
+
+  <!-- Header -->
+  <text x="40" y="52" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="32" font-weight="800" fill="#0f172a">Cloudify</text>
+  <text x="40" y="78" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#be123c">Goal</text>
+  <text x="88" y="78" font-family="system-ui, sans-serif" font-size="14" fill="#475569">From architecture diagram to reviewable Terraform - in minutes.</text>
+  <text x="720" y="52" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748b">Design</text>
+  <text x="790" y="52" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">&#8594;</text>
+  <text x="810" y="52" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748b">Validate</text>
+  <text x="880" y="52" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">&#8594;</text>
+  <text x="900" y="52" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748b">Generate</text>
+  <text x="980" y="52" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">&#8594;</text>
+  <text x="1000" y="52" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#64748b">Ship</text>
+
+  <!-- Step cards (drawn before arrows so arrows sit on top) -->
+  <g filter="url(#cardShadow)">
+    <rect x="40" y="108" width="220" height="290" rx="6" fill="#4b5563"/>
+    <rect x="40" y="108" width="220" height="8" rx="6" fill="#374151"/>
+    <text x="60" y="142" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f9fafb">1. Architecture Input</text>
+    <text x="60" y="164" font-family="system-ui, sans-serif" font-size="11" fill="#e5e7eb">Create or upload your diagram</text>
+    <rect x="110" y="182" width="80" height="56" rx="8" fill="#6b7280"/>
+    <rect x="128" y="196" width="44" height="32" rx="4" fill="#d1d5db"/>
+    <circle cx="150" cy="208" r="6" fill="#9ca3af"/>
+    <text x="60" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#f3f4f6">&#8226; Draw.io / XML</text>
+    <text x="60" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#f3f4f6">&#8226; PNG / JPEG / WebP</text>
+    <text x="60" y="306" font-family="system-ui, sans-serif" font-size="11" fill="#f3f4f6">&#8226; In-app AWS editor</text>
+    <text x="60" y="340" font-family="system-ui, sans-serif" font-size="10" fill="#d1d5db">Drag, connect, name resources</text>
+    <text x="60" y="358" font-family="system-ui, sans-serif" font-size="10" fill="#d1d5db">on the canvas</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="280" y="108" width="220" height="290" rx="6" fill="#e11d48"/>
+    <rect x="280" y="108" width="220" height="8" rx="6" fill="#be123c"/>
+    <text x="300" y="142" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#fff1f2">2. Intelligent Analysis</text>
+    <text x="300" y="164" font-family="system-ui, sans-serif" font-size="11" fill="#fecdd3">Understand infrastructure from input</text>
+    <circle cx="390" cy="212" r="28" fill="#f43f5e" stroke="#fff1f2" stroke-width="2"/>
+    <circle cx="378" cy="208" r="4" fill="#fff1f2"/>
+    <circle cx="402" cy="208" r="4" fill="#fff1f2"/>
+    <circle cx="390" cy="224" r="4" fill="#fff1f2"/>
+    <line x1="382" y1="211" x2="390" y2="221" stroke="#fff1f2" stroke-width="1.5"/>
+    <line x1="398" y1="211" x2="390" y2="221" stroke="#fff1f2" stroke-width="1.5"/>
+    <text x="300" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">&#8226; Extract resources and edges</text>
+    <text x="300" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">&#8226; Build topology graph</text>
+    <text x="300" y="306" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">&#8226; Vision (Gemini / Ollama)</text>
+    <text x="300" y="328" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">&#8226; or Draw.io parse</text>
+    <text x="300" y="358" font-family="system-ui, sans-serif" font-size="10" fill="#fecdd3">Session stores topology JSON</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="520" y="108" width="220" height="290" rx="6" fill="#2563eb"/>
+    <rect x="520" y="108" width="220" height="8" rx="6" fill="#1d4ed8"/>
+    <text x="540" y="142" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#eff6ff">3. Validation &amp; Governance</text>
+    <text x="540" y="164" font-family="system-ui, sans-serif" font-size="11" fill="#dbeafe">Rules, advisor and Registry refs</text>
+    <circle cx="630" cy="212" r="30" fill="#3b82f6"/>
+    <path d="M618 212 L626 220 L644 200" stroke="#eff6ff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="540" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#eff6ff">&#8226; Validate connections</text>
+    <text x="540" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#eff6ff">&#8226; Naming and config checks</text>
+    <text x="540" y="306" font-family="system-ui, sans-serif" font-size="11" fill="#eff6ff">&#8226; Advisor (DLQ, alarms)</text>
+    <text x="540" y="328" font-family="system-ui, sans-serif" font-size="11" fill="#eff6ff">&#8226; Terraform Registry links</text>
+    <text x="540" y="358" font-family="system-ui, sans-serif" font-size="10" fill="#dbeafe">Blocking errors gate the wizard</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="760" y="108" width="220" height="290" rx="6" fill="#16a34a"/>
+    <rect x="760" y="108" width="220" height="8" rx="6" fill="#15803d"/>
+    <text x="780" y="142" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#f0fdf4">4. Generate Terraform</text>
+    <text x="780" y="164" font-family="system-ui, sans-serif" font-size="11" fill="#dcfce7">Deterministic, config-driven HCL</text>
+    <rect x="838" y="188" width="64" height="48" rx="4" fill="#22c55e" stroke="#bbf7d0"/>
+    <text x="870" y="218" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#14532d">.tf</text>
+    <text x="780" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#f0fdf4">&#8226; infra/ modules and wiring</text>
+    <text x="780" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#f0fdf4">&#8226; Canvas config &#8594; HCL args</text>
+    <text x="780" y="306" font-family="system-ui, sans-serif" font-size="11" fill="#f0fdf4">&#8226; Topology-driven AWS resources</text>
+    <text x="780" y="328" font-family="system-ui, sans-serif" font-size="11" fill="#f0fdf4">&#8226; Golden tests on output</text>
+    <text x="780" y="358" font-family="system-ui, sans-serif" font-size="10" fill="#dcfce7">Preview and copy in wizard</text>
+  </g>
+
+  <g filter="url(#cardShadow)">
+    <rect x="1000" y="108" width="240" height="290" rx="6" fill="#ca8a04"/>
+    <rect x="1000" y="108" width="240" height="8" rx="6" fill="#a16207"/>
+    <text x="1020" y="142" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#fefce8">5. DevOps Delivery</text>
+    <text x="1020" y="164" font-family="system-ui, sans-serif" font-size="11" fill="#fef9c3">Pull request and CI/CD ready</text>
+    <circle cx="1090" cy="200" r="8" fill="#fef08a"/>
+    <circle cx="1120" cy="200" r="8" fill="#fef08a"/>
+    <circle cx="1120" cy="228" r="8" fill="#fef08a"/>
+    <path d="M1090 208 v16 M1120 208 v4" stroke="#fef9c3" stroke-width="3" fill="none"/>
+    <text x="1020" y="262" font-family="system-ui, sans-serif" font-size="11" fill="#fefce8">&#8226; Push to GitHub repo</text>
+    <text x="1020" y="284" font-family="system-ui, sans-serif" font-size="11" fill="#fefce8">&#8226; Feature branch + PR</text>
+    <text x="1020" y="306" font-family="system-ui, sans-serif" font-size="11" fill="#fefce8">&#8226; Actions: plan on PR</text>
+    <text x="1020" y="328" font-family="system-ui, sans-serif" font-size="11" fill="#fefce8">&#8226; Apply after merge (gated)</text>
+    <text x="1020" y="358" font-family="system-ui, sans-serif" font-size="10" fill="#fef9c3">Optional local terraform CLI</text>
+  </g>
+
+  <!-- Flow arrows between steps (on top) -->
+  <g aria-hidden="true">
+    <rect x="258" y="236" width="24" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <path d="M264 253 H276" stroke="#334155" stroke-width="3" fill="none" marker-end="url(#flowArrow)"/>
+    <rect x="498" y="236" width="24" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <path d="M504 253 H516" stroke="#334155" stroke-width="3" fill="none" marker-end="url(#flowArrow)"/>
+    <rect x="738" y="236" width="24" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <path d="M744 253 H756" stroke="#334155" stroke-width="3" fill="none" marker-end="url(#flowArrow)"/>
+    <rect x="978" y="236" width="24" height="34" rx="6" fill="#f8fafc" stroke="#cbd5e1"/>
+    <path d="M984 253 H996" stroke="#334155" stroke-width="3" fill="none" marker-end="url(#flowArrow)"/>
+  </g>
+
+  <!-- Key benefits -->
+  <rect x="40" y="430" width="1200" height="100" rx="10" fill="#be123c"/>
+  <text x="60" y="458" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#fff1f2">Key Benefits</text>
+
+  <text x="60" y="488" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fecdd3">(1) Faster delivery</text>
+  <text x="60" y="508" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">Sketch to PR in minutes, not days of hand-written HCL</text>
+
+  <text x="360" y="488" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fecdd3">(2) Consistent and reviewable</text>
+  <text x="360" y="508" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">Topology-driven codegen + validation before merge</text>
+
+  <text x="680" y="488" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fecdd3">(3) Collaboration</text>
+  <text x="680" y="508" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">Architects diagram; platform gets a normal GitHub PR</text>
+
+  <text x="980" y="488" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#fecdd3">(4) Traceability</text>
+  <text x="980" y="508" font-family="system-ui, sans-serif" font-size="11" fill="#fff1f2">Visible path from design &#8594; analyze &#8594; infra/</text>
+
+  <text x="640" y="548" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#9ca3af">Cloudify - Diagram &#8594; Terraform &#8594; PR - Next.js + Spring Boot</text>
+</svg>

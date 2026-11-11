@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 420" role="img" aria-label="Cloudify architecture">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff1f2"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="shadow" x="-8%" y="-8%" width="116%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="920" height="420" fill="url(#bg)" rx="16"/>
+
+  <text x="460" y="40" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#0f172a">Cloudify - diagram to Terraform pull request</text>
+
+  <!-- Browser -->
+  <rect x="32" y="72" width="248" height="300" rx="14" fill="#1e293b" filter="url(#shadow)"/>
+  <text x="156" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#f8fafc">Browser (Next.js)</text>
+  <rect x="52" y="118" width="208" height="52" rx="10" fill="#334155"/>
+  <text x="156" y="142" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#f1f5f9">Architecture editor</text>
+  <text x="156" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8">canvas · validation UI</text>
+  <rect x="52" y="182" width="208" height="52" rx="10" fill="#334155"/>
+  <text x="156" y="206" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#f1f5f9">Diagram import</text>
+  <text x="156" y="222" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8">Draw.io · vision (optional)</text>
+  <rect x="52" y="246" width="208" height="52" rx="10" fill="#be123c"/>
+  <text x="156" y="270" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#fff1f2">Workflow wizard</text>
+  <text x="156" y="286" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#fecdd3">analyze · HCL · delivery</text>
+  <text x="156" y="340" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#94a3b8">localhost:3000</text>
+
+  <!-- API -->
+  <rect x="320" y="72" width="280" height="300" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+  <text x="460" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#0f172a">Cloudify API (Spring Boot)</text>
+  <rect x="340" y="114" width="240" height="40" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="460" y="139" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Sessions · analyze · advisor rules</text>
+  <rect x="340" y="164" width="115" height="44" rx="8" fill="#fff1f2" stroke="#fda4af"/>
+  <text x="397" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#9f1239">Import</text>
+  <text x="397" y="198" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#be123c">/api/v1/import</text>
+  <rect x="465" y="164" width="115" height="44" rx="8" fill="#fff1f2" stroke="#fda4af"/>
+  <text x="522" y="184" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#9f1239">Terraform gen</text>
+    <text x="522" y="198" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#be123c">config &#8594; HCL</text>
+  <rect x="340" y="218" width="240" height="40" rx="8" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="460" y="243" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#334155">GitHub PR service + optional terraform CLI</text>
+  <rect x="340" y="268" width="240" height="40" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="460" y="293" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#1e3a8a">Registry doc links (static map)</text>
+  <text x="460" y="348" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">localhost:8080</text>
+
+  <!-- External -->
+  <rect x="640" y="72" width="248" height="300" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="2" filter="url(#shadow)"/>
+  <text x="764" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#0f172a">External systems</text>
+  <rect x="660" y="118" width="208" height="56" rx="10" fill="#f0fdf4" stroke="#86efac"/>
+  <text x="764" y="142" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#14532d">GitHub</text>
+  <text x="764" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#166534">branch · infra/* · Actions plan/apply</text>
+  <rect x="660" y="188" width="208" height="56" rx="10" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="764" y="212" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e3a8a">Terraform Registry</text>
+  <text x="764" y="228" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#1d4ed8">provider docs references</text>
+  <rect x="660" y="258" width="208" height="56" rx="10" fill="#faf5ff" stroke="#d8b4fe"/>
+  <text x="764" y="282" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#5b21b6">Vision (optional)</text>
+  <text x="764" y="298" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#6d28d9">Gemini · Ollama · mock fallback</text>
+  <text x="764" y="348" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">AWS via Actions after merge</text>
+
+  <!-- Arrows -->
+  <path d="M280 200 H312" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="296" y="192" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#475569">topology</text>
+  <path d="M600 210 H632" stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="616" y="202" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#475569">HCL + PR</text>
+  <path d="M522 164 L620 145" stroke="#94a3b8" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+  <text x="578" y="138" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#64748b">vision</text>
+  <path d="M560 308 L652 235" stroke="#94a3b8" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+</svg>

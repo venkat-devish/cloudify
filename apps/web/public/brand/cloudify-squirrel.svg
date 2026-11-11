@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <rect width="64" height="64" rx="14" fill="#171717"/>
+  <path fill="#e11d48" d="M32 8c-8 4-14 12-14 22 0 2 .2 4 .6 5.8L10 52l12.2-4.2c2 1.2 4.2 1.8 6.6 1.8 11 0 20-9 20-20S43 8 32 8z" opacity=".15"/>
+  <ellipse cx="32" cy="38" rx="16" ry="18" fill="#f97316"/>
+  <ellipse cx="32" cy="40" rx="11" ry="12" fill="#fdba74"/>
+  <path fill="#f97316" d="M20 22c-6-2-10 2-11 8-1 5 2 9 7 10 2-6 5-12 4-18zM44 22c6-2 10 2 11 8 1 5-2 9-7 10-2-6-5-12-4-18z"/>
+  <circle cx="26" cy="36" r="2.5" fill="#1e293b"/>
+  <circle cx="38" cy="36" r="2.5" fill="#1e293b"/>
+  <path stroke="#1e293b" stroke-width="2" stroke-linecap="round" d="M28 44q4 3 8 0"/>
+  <path fill="#e11d48" d="M24 48h16c2 0 4 2 4 5v3H20v-3c0-3 2-5 4-5z"/>
+  <text x="32" y="54" text-anchor="middle" fill="#fff" font-family="system-ui,sans-serif" font-size="5" font-weight="700">cloudify</text>
+</svg>

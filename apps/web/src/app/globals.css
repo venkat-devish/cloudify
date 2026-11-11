@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f1f5f9;
+  --foreground: #0f172a;
+  --input-bg: #ffffff;
+  --input-border: #334155;
+  --input-text: #0f172a;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.cloudify-input {
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 2px solid var(--input-border);
+}
+
+.cloudify-input::placeholder {
+  color: #64748b;
+}
+
+.cloudify-input:focus {
+  outline: 2px solid #e11d48;
+  outline-offset: 1px;
+}
+
+.react-flow__handle {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #0f172a;
+  background: #fff;
+}
+
+.react-flow__handle-left {
+  left: -6px;
+}
+
+.react-flow__handle-right {
+  right: -6px;
+}
+
+@keyframes pr-deploy-push {
+  0%,
+  100% {
+    transform: translate(0, -50%);
+  }
+  45% {
+    transform: translate(200px, -50%);
+  }
+  55% {
+    transform: translate(200px, -50%) scale(0.95);
+    opacity: 0.85;
+  }
+}
+
+.pr-deploy-track {
+  animation: pr-deploy-push 2.2s ease-in-out infinite;
+}
+
+@keyframes workflow-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.workflow-spinner {
+  animation: workflow-spin 0.75s linear infinite;
+}

@@ -1,11 +1,11 @@
-resource "aws_sns_topic_subscription" "test-topic-sns_to_test-image-queue" {
-  topic_arn = aws_sns_topic.test-topic-sns.arn
+resource "aws_sns_topic_subscription" "video-upload-topic_to_video-processing-queue" {
+  topic_arn = aws_sns_topic.video-upload-topic.arn
   protocol  = "sqs"
-  endpoint  = aws_sqs_queue.test-image-queue.arn
+  endpoint  = aws_sqs_queue.video-processing-queue.arn
 }
 
-resource "aws_sqs_queue_policy" "test-topic-sns_to_test-image-queue_queue_policy" {
-  queue_url = aws_sqs_queue.test-image-queue.id
+resource "aws_sqs_queue_policy" "video-upload-topic_to_video-processing-queue_queue_policy" {
+  queue_url = aws_sqs_queue.video-processing-queue.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -13,28 +13,28 @@ resource "aws_sqs_queue_policy" "test-topic-sns_to_test-image-queue_queue_policy
       Effect    = "Allow"
       Principal = { Service = "sns.amazonaws.com" }
       Action    = "sqs:SendMessage"
-      Resource  = aws_sqs_queue.test-image-queue.arn
+      Resource  = aws_sqs_queue.video-processing-queue.arn
       Condition = {
         ArnEquals = {
-          "aws:SourceArn" = aws_sns_topic.test-topic-sns.arn
+          "aws:SourceArn" = aws_sns_topic.video-upload-topic.arn
         }
       }
     }]
   })
 }
-resource "aws_lambda_event_source_mapping" "test-image-queue_test-image-lambda" {
-  event_source_arn = aws_sqs_queue.test-image-queue.arn
-  function_name    = aws_lambda_function.test-image-lambda.arn
+resource "aws_lambda_event_source_mapping" "video-processing-queue_video-processor" {
+  event_source_arn = aws_sqs_queue.video-processing-queue.arn
+  function_name    = aws_lambda_function.video-processor.arn
   batch_size       = 10
 }
 
-resource "aws_iam_role_policy_attachment" "test-image-lambda-sqs-consumer" {
-  role       = aws_iam_role.test-image-lambda-role.name
+resource "aws_iam_role_policy_attachment" "video-processor-sqs-consumer" {
+  role       = aws_iam_role.video-processor-role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole"
 }
-resource "aws_iam_role_policy" "test-image-lambda-s3-test-image" {
-  name = "${var.project_name}-test-image-lambda-s3-test-image"
-  role = aws_iam_role.test-image-lambda-role.id
+resource "aws_iam_role_policy" "video-processor-s3-video-storage" {
+  name = "${var.project_name}-video-processor-s3-video-storage"
+  role = aws_iam_role.video-processor-role.id
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -45,8 +45,8 @@ resource "aws_iam_role_policy" "test-image-lambda-s3-test-image" {
         "s3:ListBucket",
       ]
       Resource = [
-        aws_s3_bucket.test-image.arn,
-        "${aws_s3_bucket.test-image.arn}/*",
+        aws_s3_bucket.video-storage.arn,
+        "${aws_s3_bucket.video-storage.arn}/*",
       ]
     }]
   })

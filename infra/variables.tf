@@ -1,6 +1,6 @@
 variable "project_name" {
   type    = string
-  default = "videoedit"
+  default = "infraforge"
 }
 
 variable "environment" {

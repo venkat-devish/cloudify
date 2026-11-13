@@ -1,5 +1,5 @@
 
-resource "aws_sns_topic" "video-upload-topic" {
-  name = "${var.project_name}-video-upload-topic"
+resource "aws_sns_topic" "sdsd" {
+  name = "${var.project_name}-sdsd"
   tags = local.tags
 }

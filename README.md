@@ -14,6 +14,10 @@
 
 *Pitch-style pipeline (SVG). Export as PNG: open the file in a browser → Save, or use `rsvg-convert` / Figma.*
 
+## Deploy (public demo — canvas + mock PR)
+
+See **[docs/DEPLOY.md](docs/DEPLOY.md)** — Vercel (`apps/web`) + Render API, ~10 minutes, no GitHub secrets.
+
 ## Run
 
 ```bash

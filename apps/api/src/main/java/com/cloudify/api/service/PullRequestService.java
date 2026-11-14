@@ -37,6 +37,10 @@ public class PullRequestService {
 
     public record PrResult(String branchName, String pullRequestUrl, boolean mock) {}
 
+    public boolean isMockDelivery() {
+        return !githubEnabled;
+    }
+
     public PrResult createPullRequest(SessionRecord session) {
         String timestamp = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneOffset.UTC).format(Instant.now());
         String slug = session.getTopology().getProjectName().toLowerCase().replaceAll("[^a-z0-9-]", "-");

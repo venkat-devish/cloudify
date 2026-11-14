@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 spring:
   application:
     name: cloudify-api
@@ -8,7 +8,7 @@ spring:
       max-file-size: 12MB
       max-request-size: 12MB
 cloudify:
-  cors-origins: http://localhost:3000
+  cors-origins: ${CLOUDIFY_CORS_ORIGINS:http://localhost:3000}
   vision:
     provider: ${VISION_PROVIDER:auto}
     gemini-api-key: ${GEMINI_API_KEY:}
@@ -20,7 +20,7 @@ cloudify:
     allow-apply: false
   github:
     enabled: ${GITHUB_ENABLED:false}
-    owner: ${GITHUB_OWNER:}
-    repository: ${GITHUB_REPOSITORY:cloudify-infra}
+    owner: ${GITHUB_OWNER:venkat-devish}
+    repository: ${GITHUB_REPOSITORY:cloudify}
     default-branch: ${GITHUB_DEFAULT_BRANCH:main}
     personal-access-token: ${GITHUB_TOKEN:}

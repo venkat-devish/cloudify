@@ -71,37 +71,38 @@ export default function WorkflowWizard() {
       .catch(() => setTopology(null));
   }, [sessionId]);
 
-  useEffect(() => {
+  const runStep = useCallback(async () => {
     if (!sessionId) return;
     setLoading(true);
     setError(null);
-    const run = async () => {
-      try {
-        if (step === 1) {
-          const res = await analyzeSession(sessionId);
-          setSuggestions(res.suggestions);
-          setDocRefs(res.docReferences ?? []);
-          setCanContinue(res.canContinue);
-        } else if (step === 2) {
-          setValidations(await getValidation(sessionId));
-        } else if (step === 3) {
-          const res = await generateTerraform(sessionId);
-          setFiles(res.files);
-          setSelectedFile(Object.keys(res.files)[0] ?? "");
-        } else if (step === 4) {
-          const res = await createPullRequest(sessionId);
-          setPrUrl(res.pullRequestUrl);
-          setBranch(res.branchName);
-          setPrMock(res.mock);
-        }
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Request failed");
-      } finally {
-        setLoading(false);
+    try {
+      if (step === 1) {
+        const res = await analyzeSession(sessionId);
+        setSuggestions(res.suggestions);
+        setDocRefs(res.docReferences ?? []);
+        setCanContinue(res.canContinue);
+      } else if (step === 2) {
+        setValidations(await getValidation(sessionId));
+      } else if (step === 3) {
+        const res = await generateTerraform(sessionId);
+        setFiles(res.files);
+        setSelectedFile(Object.keys(res.files)[0] ?? "");
+      } else if (step === 4) {
+        const res = await createPullRequest(sessionId);
+        setPrUrl(res.pullRequestUrl);
+        setBranch(res.branchName);
+        setPrMock(res.mock);
       }
-    };
-    void run();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Request failed");
+    } finally {
+      setLoading(false);
+    }
   }, [sessionId, step]);
+
+  useEffect(() => {
+    void runStep();
+  }, [runStep]);
 
   if (!sessionId) {
     return <p className="p-8 font-medium text-slate-800">Missing session. Start from the diagram editor.</p>;
@@ -238,26 +239,52 @@ export default function WorkflowWizard() {
         </section>
       )}
 
-      {step === 4 && !loading && (
+      {step === 4 && !loading && !error && (
         <section>
           <h1 className="text-2xl font-bold text-slate-900">Delivery handoff</h1>
           <p className="mt-2 text-slate-700">
             {prMock
-              ? "Configure GitHub on the API to push infra/ and open a real PR. CI runs plan on the PR and apply after merge."
+              ? "Pull request handoff (sandbox): infra was generated and a feature branch name was assigned — same UX as production without pushing to GitHub."
               : "Pull request opened. Review the plan in GitHub Actions, merge to main, then approve apply in the target environment."}
           </p>
           <div className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Feature branch</p>
-            <p className="mt-1 font-mono text-sm text-slate-900">{branch}</p>
-            <a
-              href={prUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-flex items-center rounded-lg bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-700"
-            >
-              Open pull request
-            </a>
+            {prMock && (
+              <span className="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-amber-900">
+                Demo PR
+              </span>
+            )}
+            <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-500">Feature branch</p>
+            <p className="mt-1 font-mono text-sm text-slate-900">{branch || "—"}</p>
+            {prUrl ? (
+              <a
+                href={prUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-4 inline-flex items-center rounded-lg bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-700"
+              >
+                {prMock ? "Open pull request (demo)" : "Open pull request"}
+              </a>
+            ) : null}
+            {prMock && (
+              <p className="mt-3 text-xs text-slate-500">
+                Opens a GitHub compare link for the generated branch name (no files pushed in sandbox mode).
+              </p>
+            )}
           </div>
+        </section>
+      )}
+
+      {step === 4 && !loading && error && (
+        <section className="rounded-xl border border-rose-200 bg-rose-50 p-5">
+          <h2 className="text-lg font-bold text-rose-950">Could not open pull request</h2>
+          <p className="mt-2 text-sm text-rose-900">{error}</p>
+          <button
+            type="button"
+            onClick={() => void runStep()}
+            className="mt-4 rounded-lg bg-rose-600 px-4 py-2 text-sm font-bold text-white hover:bg-rose-700"
+          >
+            Retry
+          </button>
         </section>
       )}
 

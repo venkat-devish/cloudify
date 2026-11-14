@@ -166,18 +166,44 @@ public class GitHubService {
   }
 
   private String get(String path) {
-    return client.get().uri(path).headers(this::auth).retrieve().body(String.class);
+    try {
+      return client.get().uri(path).headers(this::auth).retrieve().body(String.class);
+    } catch (RestClientResponseException e) {
+      throw githubError("GET", path, e);
+    }
   }
 
   private String post(String path, ObjectNode body) {
-    return client
-        .post()
-        .uri(path)
-        .headers(this::auth)
-        .contentType(MediaType.APPLICATION_JSON)
-        .body(body)
-        .retrieve()
-        .body(String.class);
+    try {
+      return client
+          .post()
+          .uri(path)
+          .headers(this::auth)
+          .contentType(MediaType.APPLICATION_JSON)
+          .body(body)
+          .retrieve()
+          .body(String.class);
+    } catch (RestClientResponseException e) {
+      throw githubError("POST", path, e);
+    }
+  }
+
+  private static IllegalStateException githubError(String method, String path, RestClientResponseException e) {
+    String body = e.getResponseBodyAsString();
+    if (body != null && body.length() > 280) {
+      body = body.substring(0, 280) + "…";
+    }
+    String hint =
+        switch (e.getStatusCode().value()) {
+          case 401, 403 -> " — check GITHUB_TOKEN and repo access";
+          case 404 -> " — check GITHUB_OWNER / GITHUB_REPOSITORY and that default branch exists";
+          default -> "";
+        };
+    return new IllegalStateException(
+        "GitHub " + method + " " + path + " → " + e.getStatusCode().value()
+            + (body == null || body.isBlank() ? "" : ": " + body)
+            + hint,
+        e);
   }
 
   private void auth(HttpHeaders h) {

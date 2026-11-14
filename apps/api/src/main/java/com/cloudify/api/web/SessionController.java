@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
@@ -154,15 +155,41 @@ public class SessionController {
         SessionRecord r = require(id);
         if (r.getTerraformFiles().isEmpty()) {
             r.setTerraformFiles(terraformGenerator.generate(r.getTopology()));
+            store.save(r);
         }
-        var pr = pullRequestService.createPullRequest(r);
-        r.setFeatureBranch(pr.branchName());
-        r.setPullRequestUrl(pr.pullRequestUrl());
-        store.save(r);
-        return PullRequestResponse.builder()
-                .branchName(pr.branchName())
-                .pullRequestUrl(pr.pullRequestUrl())
-                .mock(pr.mock())
-                .build();
+        boolean cached =
+                r.getPullRequestUrl() != null
+                        && !r.getPullRequestUrl().isBlank()
+                        && r.getFeatureBranch() != null
+                        && !r.getFeatureBranch().isBlank();
+        boolean cachedWasMockCompare = cached && r.getPullRequestUrl().contains("/compare/");
+        if (cached && !(cachedWasMockCompare && !pullRequestService.isMockDelivery())) {
+            return PullRequestResponse.builder()
+                    .branchName(r.getFeatureBranch())
+                    .pullRequestUrl(r.getPullRequestUrl())
+                    .mock(pullRequestService.isMockDelivery() || cachedWasMockCompare)
+                    .build();
+        }
+        try {
+            var pr = pullRequestService.createPullRequest(r);
+            r.setFeatureBranch(pr.branchName());
+            r.setPullRequestUrl(pr.pullRequestUrl());
+            store.save(r);
+            return PullRequestResponse.builder()
+                    .branchName(pr.branchName())
+                    .pullRequestUrl(pr.pullRequestUrl())
+                    .mock(pr.mock())
+                    .build();
+        } catch (RestClientResponseException e) {
+            String detail = e.getResponseBodyAsString();
+            if (detail != null && detail.length() > 400) {
+                detail = detail.substring(0, 400) + "…";
+            }
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_GATEWAY,
+                    "GitHub API " + e.getStatusCode().value() + (detail == null || detail.isBlank() ? "" : ": " + detail));
+        } catch (IllegalStateException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, e.getMessage());
+        }
     }
 }

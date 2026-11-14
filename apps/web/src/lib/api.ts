@@ -12,6 +12,12 @@ const base = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 async function json<T>(res: Response): Promise<T> {
   if (!res.ok) {
     const text = await res.text();
+    try {
+      const body = JSON.parse(text) as { message?: string };
+      if (body.message) throw new Error(body.message);
+    } catch (e) {
+      if (e instanceof Error && e.message !== text) throw e;
+    }
     throw new Error(text || res.statusText);
   }
   return res.json() as Promise<T>;

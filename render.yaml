@@ -1,0 +1,19 @@
+# Render Blueprint — Spring Boot API (free tier). Pair with Vercel for apps/web.
+# After deploy: set CLOUDIFY_CORS_ORIGINS to your Vercel URL (comma-separate preview + prod if needed).
+
+services:
+  - type: web
+    name: cloudify-api
+    runtime: java
+    rootDir: apps/api
+    buildCommand: mvn -DskipTests package
+    startCommand: java -jar target/api-0.0.1-SNAPSHOT.jar
+    plan: free
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: GITHUB_ENABLED
+        value: false
+      - key: VISION_PROVIDER
+        value: mock
+      - key: CLOUDIFY_CORS_ORIGINS
+        sync: false

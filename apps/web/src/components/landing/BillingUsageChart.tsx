@@ -10,7 +10,7 @@ export default function BillingUsageChart() {
       <div className="flex items-baseline justify-between gap-4">
         <div>
           <p className="text-sm font-semibold text-slate-900">Monthly spend trend</p>
-          <p className="mt-0.5 text-xs text-slate-500">Sample workload · USD · mock data</p>
+          <p className="mt-0.5 text-xs text-slate-500">Workload estimate · USD</p>
         </div>
         <p className="text-lg font-semibold text-slate-900">
           ${VALUES[VALUES.length - 1]}

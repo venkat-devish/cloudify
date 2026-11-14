@@ -31,7 +31,7 @@ export default function OperationsView({ tab }: { tab: InsightsTab }) {
     },
     billing: {
       h1: "Billing & usage",
-      sub: "Indicative cost breakdown and usage trend for portfolio demos.",
+      sub: "Indicative cost breakdown and usage trend for this architecture.",
     },
   };
 

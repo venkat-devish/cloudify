@@ -2,7 +2,7 @@ import type { Topology } from "./types";
 
 /** Reference event-driven stack shown on the landing page insights panel. */
 export const LANDING_SAMPLE_TOPOLOGY: Topology = {
-  projectName: "cloudify-demo",
+  projectName: "orders-pipeline",
   terraformCoreVersion: "1.5.0",
   awsProviderVersion: "5.0",
   nodes: [

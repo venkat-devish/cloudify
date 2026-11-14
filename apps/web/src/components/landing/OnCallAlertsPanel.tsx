@@ -30,7 +30,7 @@ export default function OnCallAlertsPanel({
     return (
       <p className="rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-900">
         {error}
-        <span className="mt-1 block text-xs">Start the API on port 8080 for live demo data.</span>
+        <span className="mt-1 block text-xs">Insights are generated from the current architecture context.</span>
       </p>
     );
   }
@@ -44,7 +44,7 @@ export default function OnCallAlertsPanel({
     <div className="space-y-4">
       <p className="text-sm text-slate-600">
         <span className="font-semibold text-slate-900">{firing} firing</span>
-        {" · "}synthetic signals for portfolio demo — wire to CloudWatch alarms and log filters in production.
+        {" · "}correlate with CloudWatch alarms and log filters in production.
       </p>
       <ul className="space-y-3">
         {alerts.map((a) => (

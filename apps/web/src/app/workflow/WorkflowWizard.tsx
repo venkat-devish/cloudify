@@ -33,7 +33,6 @@ export default function WorkflowWizard() {
   const [selectedFile, setSelectedFile] = useState<string>("");
   const [prUrl, setPrUrl] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
-  const [prMock, setPrMock] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copyHint, setCopyHint] = useState<"file" | "all" | null>(null);
@@ -91,7 +90,6 @@ export default function WorkflowWizard() {
         const res = await createPullRequest(sessionId);
         setPrUrl(res.pullRequestUrl);
         setBranch(res.branchName);
-        setPrMock(res.mock);
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : "Request failed");
@@ -243,17 +241,11 @@ export default function WorkflowWizard() {
         <section>
           <h1 className="text-2xl font-bold text-slate-900">Delivery handoff</h1>
           <p className="mt-2 text-slate-700">
-            {prMock
-              ? "Pull request handoff (sandbox): infra was generated and a feature branch name was assigned — same UX as production without pushing to GitHub."
-              : "Pull request opened. Review the plan in GitHub Actions, merge to main, then approve apply in the target environment."}
+            Pull request opened. Review the plan in GitHub Actions, merge to main, then approve apply in the target
+            environment.
           </p>
           <div className="mt-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            {prMock && (
-              <span className="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-amber-900">
-                Demo PR
-              </span>
-            )}
-            <p className="mt-2 text-xs font-semibold uppercase tracking-wider text-slate-500">Feature branch</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Feature branch</p>
             <p className="mt-1 font-mono text-sm text-slate-900">{branch || "—"}</p>
             {prUrl ? (
               <a
@@ -262,14 +254,9 @@ export default function WorkflowWizard() {
                 rel="noreferrer"
                 className="mt-4 inline-flex items-center rounded-lg bg-rose-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-rose-700"
               >
-                {prMock ? "Open pull request (demo)" : "Open pull request"}
+                Open pull request
               </a>
             ) : null}
-            {prMock && (
-              <p className="mt-3 text-xs text-slate-500">
-                Opens a GitHub compare link for the generated branch name (no files pushed in sandbox mode).
-              </p>
-            )}
           </div>
         </section>
       )}

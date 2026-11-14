@@ -37,9 +37,7 @@ export default function UploadDiagramForm() {
     setError(null);
     try {
       const res = await importDiagram(file, projectName.trim() || "imported-diagram");
-      const hint = res.mock
-        ? `${res.message} Continuing with demo topology.`
-        : `${res.nodeCount} nodes, ${res.edgeCount} edges via ${res.visionProvider ?? res.source}.`;
+      const hint = `${res.nodeCount} nodes, ${res.edgeCount} edges — ${res.message}`;
       setLastResult(hint);
       router.push(`/workflow?sessionId=${encodeURIComponent(res.sessionId)}&step=1`);
     } catch (e) {
